@@ -137,7 +137,7 @@
                                                     valign="top" align="center" bgcolor="#0867ec"><a
                                                         href="{{ $url->to('forum')->base() }}" target="_blank"
                                                         style="border: solid 2px #0867ec; border-radius: 4px; box-sizing: border-box; cursor: pointer; display: inline-block; font-size: 16px; font-weight: bold; margin: 0; padding: 12px 24px; text-decoration: none; text-transform: capitalize; background-color: #0867ec; border-color: #0867ec; color: #ffffff;">
-                                                        Come to the community
+                                                        {{ $ctaText  }}
                                                     </a></td>
                                             </tr>
                                             </tbody>
@@ -164,8 +164,8 @@
                                 <span class="apple-link" style="color: #9a9ea6; font-size: 16px; text-align: center;">
                                     {{ $settings->get('forum_title') }}
                                 </span>
-                                <br> Don't like these emails? <a href="{{ $url->to('forum')->base() }}/newsletter/opt-out"
-                                                                 style="text-decoration: underline; color: #9a9ea6; font-size: 16px; text-align: center;">Unsubscribe</a>.
+                                <br> {{ $footerText }} <a href="{{ $url->to('forum')->base() }}/newsletter/opt-out"
+                                                                 style="text-decoration: underline; color: #9a9ea6; font-size: 16px; text-align: center;">{{ $footerUnsubscribeText }}</a>
                             </td>
                         </tr>
                     </table>

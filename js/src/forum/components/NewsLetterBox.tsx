@@ -80,7 +80,7 @@ export default class NewsLetterBox extends Component {
     try {
       await app.request({
         method: 'POST',
-        url: `${app.forum.attribute('apiUrl')}//newsletter/add`,
+        url: `${app.forum.attribute('apiUrl')}/newsletter/add`,
         body: {
           email: this.email
         }

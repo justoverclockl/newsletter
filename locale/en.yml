@@ -1,19 +1,29 @@
 justoverclock-newsletter:
   admin:
-    my_cool_key: My Cool Key
+    ctaText: Visit our community
+    newsLetterOptOutFooter: Don't like these emails?
+    newsLetterOptOutFooterUnsubscribe: Unsubscribe.
 
   forum:
+    optOutPlaceholder: Type here your email...
+    optOutPageTitle: Inbox feeling a little full? Here you can opt-out from our newsletter.
+    optOutPageDescription: |
+      <p>Oh no - you've asked us to unsubscribe you from our newsletter
+      emails. We just wanted to check that you know this means that we can'tell you
+      about our latest news. Also we'll be very sad to see you go...</p>
     newsLetterTitle: Subscribe
     newsLetterDescription: to our newsletter. Please enter your email and press enter
     newsLetterModalTitle: Data processing policy *
     consent: I read
     subscribe: Subscribe
+    unSubscribe: Unsubscribe
     emailRequired: Email is required
     invalidEmailHint: Invalid Email
     emailNotFound: Subscriber not found or already deleted
     subscriberDeleted: Subscriber successfully deleted
     subscriberExist: This email is already subscribed.
     successMessage: You are now subscribed to our newsletter!
+    successUnsubscribedMessage: You are now unsubscribed from our newsletter!
     dataProcessingModalContent: |
       <p><strong>Purpose</strong></p>
       <p>This policy outlines our approach to collecting, processing, and storing personal data for newsletter

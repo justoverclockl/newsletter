@@ -10,6 +10,7 @@ use Justoverclock\NewsLetter\Serializer\NewsLetterSubscriberSerializer;
 use Laminas\Diactoros\Response\EmptyResponse;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Tobscure\JsonApi\Document;
 
 class SendEmailController extends AbstractCreateController
@@ -29,12 +30,14 @@ class SendEmailController extends AbstractCreateController
         $body = Arr::get($data, 'body');
         $html = Arr::get($data, 'html', false);
 
+        $translator = resolve(TranslatorInterface::class);
+
         if (!$subject || !$body) {
             return new BadRequestException('Missing required fields');
         }
 
         $this->bus->dispatch(
-            new EmailSender('', $subject, $body, $html)
+            new EmailSender('', $subject, $body, $html, $translator)
         );
 
         return true;

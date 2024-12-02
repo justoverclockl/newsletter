@@ -166,7 +166,7 @@ var NewsLetterBox = /*#__PURE__*/function (_Component) {
             _context.next = 4;
             return flarum_forum_app__WEBPACK_IMPORTED_MODULE_5___default().request({
               method: 'POST',
-              url: flarum_forum_app__WEBPACK_IMPORTED_MODULE_5___default().forum.attribute('apiUrl') + "//newsletter/add",
+              url: flarum_forum_app__WEBPACK_IMPORTED_MODULE_5___default().forum.attribute('apiUrl') + "/newsletter/add",
               body: {
                 email: this.email
               }
@@ -200,6 +200,116 @@ var NewsLetterBox = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
+/***/ "./src/forum/components/pages/NewsLetterOptOutPage.tsx":
+/*!*************************************************************!*\
+  !*** ./src/forum/components/pages/NewsLetterOptOutPage.tsx ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ NewsLetterOptOutPage)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var flarum_forum_components_UserPage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/forum/components/UserPage */ "flarum/forum/components/UserPage");
+/* harmony import */ var flarum_forum_components_UserPage__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_forum_components_UserPage__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var flarum_forum_app__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! flarum/forum/app */ "flarum/forum/app");
+/* harmony import */ var flarum_forum_app__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(flarum_forum_app__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var flarum_forum_components_IndexPage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! flarum/forum/components/IndexPage */ "flarum/forum/components/IndexPage");
+/* harmony import */ var flarum_forum_components_IndexPage__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(flarum_forum_components_IndexPage__WEBPACK_IMPORTED_MODULE_5__);
+
+
+
+
+
+
+var NewsLetterOptOutPage = /*#__PURE__*/function (_UserPage) {
+  function NewsLetterOptOutPage() {
+    var _this;
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+    _this = _UserPage.call.apply(_UserPage, [this].concat(args)) || this;
+    _this.optOutEmail = '';
+    return _this;
+  }
+  (0,_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(NewsLetterOptOutPage, _UserPage);
+  var _proto = NewsLetterOptOutPage.prototype;
+  _proto.oninit = function oninit(vnode) {
+    _UserPage.prototype.oninit.call(this, vnode);
+    this.optOutEmail = '';
+  };
+  _proto.view = function view() {
+    var _this2 = this;
+    var img = flarum_forum_app__WEBPACK_IMPORTED_MODULE_4___default().forum.attribute('baseUrl') + '/assets/extensions/justoverclock-newsletter/1.png';
+    return m("div", {
+      className: "IndexPage"
+    }, flarum_forum_components_IndexPage__WEBPACK_IMPORTED_MODULE_5___default().prototype.hero(), m("div", {
+      className: "container newsletter-opt-out-container"
+    }, m("h2", null, flarum_forum_app__WEBPACK_IMPORTED_MODULE_4___default().translator.trans('justoverclock-newsletter.forum.optOutPageTitle')), m("p", null, flarum_forum_app__WEBPACK_IMPORTED_MODULE_4___default().translator.trans('justoverclock-newsletter.forum.optOutPageDescription')), m("div", null, m("form", {
+      onsubmit: this.onsubmit.bind(this),
+      className: "opt-out-form"
+    }, m("input", {
+      onchange: function onchange(e) {
+        var input = e.target;
+        _this2.optOutEmail = input.value;
+      },
+      placeholder: flarum_forum_app__WEBPACK_IMPORTED_MODULE_4___default().translator.trans('justoverclock-newsletter.forum.optOutPlaceholder'),
+      className: "FormControl",
+      type: "email"
+    }), m("button", {
+      type: "submit",
+      className: "Button Button--primary newsletter-button-opt-out"
+    }, flarum_forum_app__WEBPACK_IMPORTED_MODULE_4___default().translator.trans('justoverclock-newsletter.forum.unSubscribe')))), m("div", {
+      className: "opt-out-img-container"
+    }, m("img", {
+      src: img,
+      className: "opt-out-img",
+      alt: ""
+    }))));
+  };
+  _proto.onsubmit = /*#__PURE__*/function () {
+    var _onsubmit = (0,_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_2___default().mark(function _callee(e) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_2___default().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            e.preventDefault();
+            _context.prev = 1;
+            _context.next = 4;
+            return flarum_forum_app__WEBPACK_IMPORTED_MODULE_4___default().request({
+              method: 'DELETE',
+              url: flarum_forum_app__WEBPACK_IMPORTED_MODULE_4___default().forum.attribute('apiUrl') + "/newsletter/delete?email=" + this.optOutEmail
+            });
+          case 4:
+            flarum_forum_app__WEBPACK_IMPORTED_MODULE_4___default().alerts.show({
+              type: 'success'
+            }, flarum_forum_app__WEBPACK_IMPORTED_MODULE_4___default().translator.trans('justoverclock-newsletter.forum.successUnsubscribedMessage'));
+            _context.next = 9;
+            break;
+          case 7:
+            _context.prev = 7;
+            _context.t0 = _context["catch"](1);
+          case 9:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee, this, [[1, 7]]);
+    }));
+    function onsubmit(_x) {
+      return _onsubmit.apply(this, arguments);
+    }
+    return onsubmit;
+  }();
+  return NewsLetterOptOutPage;
+}((flarum_forum_components_UserPage__WEBPACK_IMPORTED_MODULE_3___default()));
+
+
+/***/ }),
+
 /***/ "./src/forum/index.tsx":
 /*!*****************************!*\
   !*** ./src/forum/index.tsx ***!
@@ -215,12 +325,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flarum_forum_components_IndexPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/forum/components/IndexPage */ "flarum/forum/components/IndexPage");
 /* harmony import */ var flarum_forum_components_IndexPage__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_forum_components_IndexPage__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_NewsLetterBox__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/NewsLetterBox */ "./src/forum/components/NewsLetterBox.tsx");
+/* harmony import */ var _components_pages_NewsLetterOptOutPage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/pages/NewsLetterOptOutPage */ "./src/forum/components/pages/NewsLetterOptOutPage.tsx");
+// @ts-nocheck
+
 
 
 
 
 flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().initializers.add('justoverclock/newsletter', function () {
-  // TODO: add route for opt out
+  (flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default().routes).newsLetterOptOut = {
+    path: '/newsletter/opt-out',
+    component: _components_pages_NewsLetterOptOutPage__WEBPACK_IMPORTED_MODULE_4__["default"]
+  };
   (0,flarum_common_extend__WEBPACK_IMPORTED_MODULE_1__.extend)((flarum_forum_components_IndexPage__WEBPACK_IMPORTED_MODULE_2___default().prototype), 'sidebarItems', function (items) {
     items.add('newsLetterBox', m(_components_NewsLetterBox__WEBPACK_IMPORTED_MODULE_3__["default"], null));
   });
@@ -302,6 +418,17 @@ module.exports = flarum.core.compat['forum/app'];
 
 "use strict";
 module.exports = flarum.core.compat['forum/components/IndexPage'];
+
+/***/ }),
+
+/***/ "flarum/forum/components/UserPage":
+/*!******************************************************************!*\
+  !*** external "flarum.core.compat['forum/components/UserPage']" ***!
+  \******************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = flarum.core.compat['forum/components/UserPage'];
 
 /***/ }),
 

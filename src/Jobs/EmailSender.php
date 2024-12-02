@@ -9,28 +9,37 @@ use Illuminate\Mail\Mailer;
 use Illuminate\Mail\Message;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 use Justoverclock\NewsLetter\Models\NewsLetterSubscriber;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class EmailSender implements ShouldQueue
 {
     use Queueable;
+    protected TranslatorInterface $translator;
 
     public function __construct(
         protected string $email,
         protected string $subject,
         protected string $body,
         protected bool   $html = false,
-
+        TranslatorInterface $translator
     )
     {
-
+        $this->translator = $translator;
     }
 
     public function handle(SettingsRepositoryInterface $settings, Mailer $mailer, ViewFactory $view): void
     {
         // TODO: add more variables such cta text, cta url or similar to make it customizable
+        $ctaText = $this->translator->trans('justoverclock-newsletter.admin.ctaText');
+        $newsLetterOptOutFooter = $this->translator->trans('justoverclock-newsletter.admin.newsLetterOptOutFooter');
+        $newsLetterOptOutFooterUnsubscribe = $this->translator->trans('justoverclock-newsletter.admin.newsLetterOptOutFooterUnsubscribe');
+
         $htmlContent = $view->make('justoverclock-newsletter::email.newsletter', [
             'body' => $this->body,
-            'subject' => $this->subject
+            'subject' => $this->subject,
+            'ctaText' => $ctaText,
+            'footerText' => $newsLetterOptOutFooter,
+            'footerUnsubscribeText' => $newsLetterOptOutFooterUnsubscribe
         ])->render();
 
         NewsLetterSubscriber::chunk(50, function ($subscribers) use ($mailer, $htmlContent, $settings) {
