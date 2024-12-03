@@ -29,7 +29,6 @@ class EmailSender implements ShouldQueue
 
     public function handle(SettingsRepositoryInterface $settings, Mailer $mailer, ViewFactory $view): void
     {
-        // TODO: add more variables such cta text, cta url or similar to make it customizable
         $ctaText = $this->translator->trans('justoverclock-newsletter.admin.ctaText');
         $newsLetterOptOutFooter = $this->translator->trans('justoverclock-newsletter.admin.newsLetterOptOutFooter');
         $newsLetterOptOutFooterUnsubscribe = $this->translator->trans('justoverclock-newsletter.admin.newsLetterOptOutFooterUnsubscribe');
@@ -39,7 +38,7 @@ class EmailSender implements ShouldQueue
             'subject' => $this->subject,
             'ctaText' => $ctaText,
             'footerText' => $newsLetterOptOutFooter,
-            'footerUnsubscribeText' => $newsLetterOptOutFooterUnsubscribe
+            'footerUnsubscribeText' => $newsLetterOptOutFooterUnsubscribe,
         ])->render();
 
         NewsLetterSubscriber::chunk(50, function ($subscribers) use ($mailer, $htmlContent, $settings) {
