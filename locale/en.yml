@@ -16,9 +16,11 @@ justoverclock-newsletter:
     optOutPlaceholder: Type here your email...
     optOutPageTitle: Inbox feeling a little full? Here you can opt-out from our newsletter.
     optOutPageDescription: |
-      <p>Oh no - you've asked us to unsubscribe you from our newsletter
-      emails. We just wanted to check that you know this means that we can'tell you
-      about our latest news. Also we'll be very sad to see you go...</p>
+      <p>We understand that preferences change, and we're sorry to see you unsubscribe. If you no longer wish to receive
+      our newsletter, simply click the button below. You will stop receiving future updates, offers, and news from us.</p>
+      <p>We’d love to know if there’s anything we could do to improve our newsletter or if you have any feedback to share.
+      If you change your mind, you can always re-subscribe in the future!</p>
+      <p>Thank you for your time, and we hope to stay in touch.</p>
     newsLetterTitle: Subscribe
     newsLetterDescription: to our newsletter. Please enter your email and press enter
     newsLetterModalTitle: Data processing policy *

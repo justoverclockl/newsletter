@@ -52,8 +52,6 @@
 }
 
 .opt-out-form {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -62,4 +60,26 @@
 .newsletter-button-opt-out {
   display: block;
   width: fit-content;
+}
+
+.optout-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.left-side-opt-out {
+  width: 100%;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.opt-out-img {
+  width: 70%;
+}
+
+@media only screen and (max-width: 767px) {
+  .opt-out-img {
+    width: 100%;
+  }
 }

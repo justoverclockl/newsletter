@@ -245,12 +245,16 @@ var NewsLetterOptOutPage = /*#__PURE__*/function (_UserPage) {
   };
   _proto.view = function view() {
     var _this2 = this;
-    var img = flarum_forum_app__WEBPACK_IMPORTED_MODULE_4___default().forum.attribute('baseUrl') + '/assets/extensions/justoverclock-newsletter/1.png';
+    var img = flarum_forum_app__WEBPACK_IMPORTED_MODULE_4___default().forum.attribute('baseUrl') + '/assets/extensions/justoverclock-newsletter/unsub.png';
     return m("div", {
       className: "IndexPage"
     }, flarum_forum_components_IndexPage__WEBPACK_IMPORTED_MODULE_5___default().prototype.hero(), m("div", {
       className: "container newsletter-opt-out-container"
-    }, m("h2", null, flarum_forum_app__WEBPACK_IMPORTED_MODULE_4___default().translator.trans('justoverclock-newsletter.forum.optOutPageTitle')), m("p", null, flarum_forum_app__WEBPACK_IMPORTED_MODULE_4___default().translator.trans('justoverclock-newsletter.forum.optOutPageDescription')), m("div", null, m("form", {
+    }, m("h2", null, flarum_forum_app__WEBPACK_IMPORTED_MODULE_4___default().translator.trans('justoverclock-newsletter.forum.optOutPageTitle')), m("p", null, flarum_forum_app__WEBPACK_IMPORTED_MODULE_4___default().translator.trans('justoverclock-newsletter.forum.optOutPageDescription')), m("div", {
+      className: "optout-container"
+    }, m("div", {
+      className: "left-side-opt-out"
+    }, m("form", {
       onsubmit: this.onsubmit.bind(this),
       className: "opt-out-form"
     }, m("input", {
@@ -264,12 +268,12 @@ var NewsLetterOptOutPage = /*#__PURE__*/function (_UserPage) {
     }), m("button", {
       type: "submit",
       className: "Button Button--primary newsletter-button-opt-out"
-    }, flarum_forum_app__WEBPACK_IMPORTED_MODULE_4___default().translator.trans('justoverclock-newsletter.forum.unSubscribe')))), m("div", {
-      className: "opt-out-img-container"
+    }, flarum_forum_app__WEBPACK_IMPORTED_MODULE_4___default().translator.trans('justoverclock-newsletter.forum.unSubscribe'))))), m("div", {
+      className: "left-side-opt-out"
     }, m("img", {
-      src: img,
       className: "opt-out-img",
-      alt: ""
+      src: img,
+      alt: "unsubscribe image"
     }))));
   };
   _proto.onsubmit = /*#__PURE__*/function () {
