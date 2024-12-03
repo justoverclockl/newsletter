@@ -7,12 +7,12 @@
     <style media="all" type="text/css">
         @media all {
             .btn-primary table td:hover {
-                background-color: #ec0867 !important;
+                background-color: #4d698e !important;
             }
 
             .btn-primary a:hover {
-                background-color: #ec0867 !important;
-                border-color: #ec0867 !important;
+                background-color: #4d698e !important;
+                border-color: #4d698e !important;
             }
         }
 

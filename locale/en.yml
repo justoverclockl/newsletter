@@ -3,6 +3,14 @@ justoverclock-newsletter:
     ctaText: Visit our community
     newsLetterOptOutFooter: Don't like these emails?
     newsLetterOptOutFooterUnsubscribe: Unsubscribe.
+    newsletterCountText: You are about to send this email to
+    newsletterCountTextTwo: users!
+    textOrHtml: Message (text or html)
+    emailTitle: Title
+    sendingText: Sending...
+    sendEmailButtonText: Send Email to All Subscribers
+    emailSentSuccessMessage: Emails sent successfully!
+    emailSentErrorMessage: Failed to send emails.
 
   forum:
     optOutPlaceholder: Type here your email...

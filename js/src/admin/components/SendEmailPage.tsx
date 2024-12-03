@@ -2,7 +2,7 @@
 import ExtensionPage, {ExtensionPageAttrs} from "flarum/admin/components/ExtensionPage";
 import Mithril from "mithril";
 import app from 'flarum/admin/app'
-import hljs from 'highlight.js';
+import Quill from 'quill';
 
 export default class SendEmailPage extends ExtensionPage {
   oninit(vnode: Mithril.Vnode<ExtensionPageAttrs, this>) {
@@ -10,38 +10,59 @@ export default class SendEmailPage extends ExtensionPage {
     this.loading = false
     this.getTotalSubscribers()
     this.totalSubscribers = 0;
+    this.toolbarOptions = [
+      [{ font: [] }],
+      [{ header: [1, 2, 3] }],
+      ["bold", "italic", "underline", "strike"],
+      [{ color: [] }, { background: [] }],
+      [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
+      ["blockquote", "code-block"],
+      ["link"],
+      [{ align: [] }],
+    ];
+  }
+
+  oncreate(vnode: Mithril.VnodeDOM<ExtensionPageAttrs, this>) {
+    super.oncreate(vnode);
+
+    this.quill = new Quill("#editor-container", {
+      theme: "snow",
+      modules: {
+        toolbar: this.toolbarOptions,
+      },
+    });
+
+    this.quill.on("text-change", () => {
+      this.body = this.quill.getSemanticHTML();
+      m.redraw();
+    });
   }
 
   content(vnode: Mithril.VnodeDOM<ExtensionPageAttrs, this>): JSX.Element {
     return (
       <div className="container">
-        <p>
-          You are about to send this email to {this.totalSubscribers} users!
+        <p class='newsletter-subscribers-count'>
+          {app.translator.trans('justoverclock-newsletter.admin.newsletterCountText')} <span className='subscribers-count'>{this.totalSubscribers}</span> {app.translator.trans('justoverclock-newsletter.admin.newsletterCountTextTwo')}
         </p>
         <div className="Form-group">
-          <label>Subject</label>
+          <label>{app.translator.trans('justoverclock-newsletter.admin.emailTitle')}</label>
           <input
             className="FormControl"
             type="text"
-            placeholder="Email Subject"
+            placeholder="Email title"
             oninput={(e: { target: { value: any; }; }) => (this.subject = e.target.value)}
           />
         </div>
         <div className="Form-group">
-          <label>Body</label>
-          <textarea
-            className="FormControl"
-            rows="10"
-            placeholder="Email Body"
-            oninput={(e) => (this.body = e.target.value)}
-          ></textarea>
+          <label>{app.translator.trans('justoverclock-newsletter.admin.textOrHtml')}</label>
+          <div className='editor-container FormControl' id='editor-container'></div>
         </div>
         <button
           className="Button Button--primary"
           onclick={this.sendEmail.bind(this)}
           disabled={!this.subject || !this.body}
         >
-          {this.loading ? 'Sending...' : 'Send Email to All Subscribers'}
+          {this.loading ? `${app.translator.trans('justoverclock-newsletter.admin.sendingText')}` : `${app.translator.trans('justoverclock-newsletter.admin.sendEmailButtonText')}`}
         </button>
       </div>
     )
@@ -59,6 +80,8 @@ export default class SendEmailPage extends ExtensionPage {
 
   sendEmail() {
     this.loading = true
+    this.body = this.quill.getSemanticHTML();
+    console.log(this.body)
     app.request({
       method: 'POST',
       url: app.forum.attribute('apiUrl') + '/newsletter/sendall',
@@ -71,10 +94,10 @@ export default class SendEmailPage extends ExtensionPage {
     })
       .then(() => {
         this.loading = false
-        app.alerts.show({type: 'success'}, 'Email sent successfully!');
+        app.alerts.show({type: 'success'}, `${app.translator.trans('justoverclock-newsletter.admin.emailSentSuccessMessage')}`);
       })
       .catch(() => {
-        app.alerts.show({type: 'error'}, 'Failed to send email.');
+        app.alerts.show({type: 'error'}, `${app.translator.trans('justoverclock-newsletter.admin.emailSentErrorMessage')}`);
       });
   }
 }
