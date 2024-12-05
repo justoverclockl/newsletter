@@ -41,9 +41,16 @@ export default class SendEmailPage extends ExtensionPage {
   content(vnode: Mithril.VnodeDOM<ExtensionPageAttrs, this>): JSX.Element {
     return (
       <div className="container">
-        <p class='newsletter-subscribers-count'>
-          {app.translator.trans('justoverclock-newsletter.admin.newsletterCountText')} <span className='subscribers-count'>{this.totalSubscribers}</span> {app.translator.trans('justoverclock-newsletter.admin.newsletterCountTextTwo')}
-        </p>
+        <div className='newsletter-stats-container'>
+          <div className='newsletter-stats-card'>
+            <h3>Total Subscribers</h3>
+            <small>count of total subscriber users</small>
+            <h2 className='stats-number'>{this.totalSubscribers}</h2>
+            <p>
+              {app.translator.trans('justoverclock-newsletter.admin.newsletterCountText')}
+            </p>
+          </div>
+        </div>
         <div className="Form-group">
           <label>{app.translator.trans('justoverclock-newsletter.admin.emailTitle')}</label>
           <input

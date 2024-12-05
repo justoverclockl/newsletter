@@ -5592,11 +5592,13 @@ var SendEmailPage = /*#__PURE__*/function (_ExtensionPage) {
     var _this2 = this;
     return m("div", {
       className: "container"
-    }, m("p", {
-      "class": "newsletter-subscribers-count"
-    }, flarum_admin_app__WEBPACK_IMPORTED_MODULE_2___default().translator.trans('justoverclock-newsletter.admin.newsletterCountText'), " ", m("span", {
-      className: "subscribers-count"
-    }, this.totalSubscribers), " ", flarum_admin_app__WEBPACK_IMPORTED_MODULE_2___default().translator.trans('justoverclock-newsletter.admin.newsletterCountTextTwo')), m("div", {
+    }, m("div", {
+      className: "newsletter-stats-container"
+    }, m("div", {
+      className: "newsletter-stats-card"
+    }, m("h3", null, "Total Subscribers"), m("small", null, "count of total subscriber users"), m("h2", {
+      className: "stats-number"
+    }, this.totalSubscribers), m("p", null, flarum_admin_app__WEBPACK_IMPORTED_MODULE_2___default().translator.trans('justoverclock-newsletter.admin.newsletterCountText')))), m("div", {
       className: "Form-group"
     }, m("label", null, flarum_admin_app__WEBPACK_IMPORTED_MODULE_2___default().translator.trans('justoverclock-newsletter.admin.emailTitle')), m("input", {
       className: "FormControl",
