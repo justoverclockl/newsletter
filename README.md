@@ -15,7 +15,7 @@ footer (See picture), that redirect user to a dedicated page where is possible t
 
 ### Dedicated opt-out page
 
-![img2](https://i.ibb.co/9YXsT7N/dedicated.png)
+![img2](https://i.ibb.co/CH7dd2b/22.png)
 
 ### Simple admin interface
 
