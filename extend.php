@@ -16,9 +16,9 @@ use Justoverclock\NewsLetter\Controller\AddNewsLetterSubscriber;
 use Justoverclock\NewsLetter\Controller\DeleteNewsLetterSubscriber;
 use Justoverclock\NewsLetter\Controller\GetAllSubscriber;
 use Justoverclock\NewsLetter\Controller\SendEmailController;
+use Justoverclock\NewsLetter\Controller\SentNewsletters\GetLastSentNewsletter;
 use Justoverclock\NewsLetter\Models\NewsLetterSubscriber;
 use Justoverclock\NewsLetter\Serializer\NewsLetterSubscriberSerializer;
-use Illuminate\Contracts\View\Factory;
 
 
 return [
@@ -38,7 +38,8 @@ return [
         ->get('/newsletter/subscribers', 'newsletter.getall', GetAllSubscriber::class)
         ->post('/newsletter/add', 'newsletter.add', AddNewsLetterSubscriber::class)
         ->delete('/newsletter/delete', 'newsletter.delete', DeleteNewsLetterSubscriber::class)
-        ->post('/newsletter/sendall', 'newsletter.sendToAll', SendEmailController::class),
+        ->post('/newsletter/sendall', 'newsletter.sendToAll', SendEmailController::class)
+        ->get('/last-newsletter/get', 'lastnewsletter.get', GetLastSentNewsletter::class),
 
     (new Extend\View)
         ->namespace('justoverclock-newsletter', __DIR__.'/views'),

@@ -6,6 +6,7 @@ use Flarum\Api\Controller\AbstractCreateController;
 use Illuminate\Contracts\Bus\Dispatcher;
 use Illuminate\Support\Arr;
 use Justoverclock\NewsLetter\Jobs\EmailSender;
+use Justoverclock\NewsLetter\Models\SentNewsLetterModel;
 use Justoverclock\NewsLetter\Serializer\NewsLetterSubscriberSerializer;
 use Laminas\Diactoros\Response\EmptyResponse;
 use Psr\Http\Message\ServerRequestInterface;
@@ -39,6 +40,10 @@ class SendEmailController extends AbstractCreateController
         $this->bus->dispatch(
             new EmailSender('', $subject, $body, $html, $translator)
         );
+
+        $sentNewsletter = new SentNewsLetterModel();
+        $sentNewsletter->newsletter_title = $subject;
+        $sentNewsletter->save();
 
         return true;
     }

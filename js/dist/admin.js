@@ -5554,7 +5554,9 @@ var SendEmailPage = /*#__PURE__*/function (_ExtensionPage) {
   _proto.oninit = function oninit(vnode) {
     _ExtensionPage.prototype.oninit.call(this, vnode);
     this.loading = false;
+    this.getLastNewsletterDetails();
     this.getTotalSubscribers();
+    this.lastNewsletterdetail = null;
     this.totalSubscribers = 0;
     this.toolbarOptions = [[{
       font: []
@@ -5573,6 +5575,7 @@ var SendEmailPage = /*#__PURE__*/function (_ExtensionPage) {
     }], ["blockquote", "code-block"], ["link"], [{
       align: []
     }]];
+    console.log(this.lastNewsletterdetail);
   };
   _proto.oncreate = function oncreate(vnode) {
     var _this = this;
@@ -5596,14 +5599,18 @@ var SendEmailPage = /*#__PURE__*/function (_ExtensionPage) {
       className: "newsletter-stats-container"
     }, m("div", {
       className: "newsletter-stats-card"
-    }, m("h3", null, "Total Subscribers"), m("small", null, "count of total subscriber users"), m("h2", {
+    }, m("h3", null, flarum_admin_app__WEBPACK_IMPORTED_MODULE_2___default().translator.trans('justoverclock-newsletter.admin.totalSubscribers')), m("small", null, flarum_admin_app__WEBPACK_IMPORTED_MODULE_2___default().translator.trans('justoverclock-newsletter.admin.totalSubscribersCount')), m("h2", {
       className: "stats-number"
-    }, this.totalSubscribers), m("p", null, flarum_admin_app__WEBPACK_IMPORTED_MODULE_2___default().translator.trans('justoverclock-newsletter.admin.newsletterCountText')))), m("div", {
+    }, this.totalSubscribers), m("p", null, flarum_admin_app__WEBPACK_IMPORTED_MODULE_2___default().translator.trans('justoverclock-newsletter.admin.newsletterCountText'))), m("div", {
+      className: "newsletter-stats-card"
+    }, m("h3", null, flarum_admin_app__WEBPACK_IMPORTED_MODULE_2___default().translator.trans('justoverclock-newsletter.admin.lastNewsletterSent')), m("small", null, flarum_admin_app__WEBPACK_IMPORTED_MODULE_2___default().translator.trans('justoverclock-newsletter.admin.lastNewsletterSentDescription')), m("h2", {
+      className: "stats-number"
+    }, this.lastNewsletterdetail ? this.lastNewsletterdetail.attributes.title : flarum_admin_app__WEBPACK_IMPORTED_MODULE_2___default().translator.trans('justoverclock-newsletter.admin.noNewsletterSent')), this.lastNewsletterdetail ? flarum_admin_app__WEBPACK_IMPORTED_MODULE_2___default().translator.trans('justoverclock-newsletter.admin.lastNewsletterSentText') + " " + new Date(this.lastNewsletterdetail.attributes.createdAt).toISOString().slice(0, 16) : flarum_admin_app__WEBPACK_IMPORTED_MODULE_2___default().translator.trans('justoverclock-newsletter.admin.noNewsletterSent'))), m("div", {
       className: "Form-group"
     }, m("label", null, flarum_admin_app__WEBPACK_IMPORTED_MODULE_2___default().translator.trans('justoverclock-newsletter.admin.emailTitle')), m("input", {
       className: "FormControl",
       type: "text",
-      placeholder: "Email title",
+      placeholder: "newsletter title",
       oninput: function oninput(e) {
         return _this2.subject = e.target.value;
       }
@@ -5628,11 +5635,21 @@ var SendEmailPage = /*#__PURE__*/function (_ExtensionPage) {
       m.redraw();
     });
   };
-  _proto.sendEmail = function sendEmail() {
+  _proto.getLastNewsletterDetails = function getLastNewsletterDetails() {
     var _this4 = this;
+    flarum_admin_app__WEBPACK_IMPORTED_MODULE_2___default().request({
+      method: 'GET',
+      url: flarum_admin_app__WEBPACK_IMPORTED_MODULE_2___default().forum.attribute('apiUrl') + '/last-newsletter/get'
+    }).then(function (data) {
+      _this4.lastNewsletterdetail = data.data.length > 0 ? data.data[0] : null;
+      console.log(data.data);
+      m.redraw();
+    });
+  };
+  _proto.sendEmail = function sendEmail() {
+    var _this5 = this;
     this.loading = true;
     this.body = this.quill.getSemanticHTML();
-    console.log(this.body);
     flarum_admin_app__WEBPACK_IMPORTED_MODULE_2___default().request({
       method: 'POST',
       url: flarum_admin_app__WEBPACK_IMPORTED_MODULE_2___default().forum.attribute('apiUrl') + '/newsletter/sendall',
@@ -5643,7 +5660,7 @@ var SendEmailPage = /*#__PURE__*/function (_ExtensionPage) {
         html: this.html
       }
     }).then(function () {
-      _this4.loading = false;
+      _this5.loading = false;
       flarum_admin_app__WEBPACK_IMPORTED_MODULE_2___default().alerts.show({
         type: 'success'
       }, "" + flarum_admin_app__WEBPACK_IMPORTED_MODULE_2___default().translator.trans('justoverclock-newsletter.admin.emailSentSuccessMessage'));

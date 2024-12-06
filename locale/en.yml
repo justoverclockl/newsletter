@@ -5,12 +5,18 @@ justoverclock-newsletter:
     newsLetterOptOutFooterUnsubscribe: Unsubscribe.
     newsletterCountText: Your newsletter will be sent to all of the above subscribers.
     newsletterCountTextTwo: users!
-    textOrHtml: Message (text or html)
-    emailTitle: Title
+    textOrHtml: Newsletter Body (text or html)
+    emailTitle: Newsletter Title
     sendingText: Sending...
     sendEmailButtonText: Send Email to All Subscribers
     emailSentSuccessMessage: Emails sent successfully!
     emailSentErrorMessage: Failed to send emails.
+    noNewsletterSent: No data
+    totalSubscribers: Total subscribers
+    totalSubscribersCount: count of total subscriber users
+    lastNewsletterSent: Last newsletter sent
+    lastNewsletterSentDescription: title of the last newsletter sent
+    lastNewsletterSentText: "sent on: "
 
   forum:
     optOutPlaceholder: Type here your email...
