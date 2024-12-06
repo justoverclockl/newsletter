@@ -8,7 +8,9 @@ export default class SendEmailPage extends ExtensionPage {
   oninit(vnode: Mithril.Vnode<ExtensionPageAttrs, this>) {
     super.oninit(vnode);
     this.loading = false
+    this.getLastNewsletterDetails()
     this.getTotalSubscribers()
+    this.lastNewsletterdetail = null
     this.totalSubscribers = 0;
     this.toolbarOptions = [
       [{ font: [] }],
@@ -20,10 +22,12 @@ export default class SendEmailPage extends ExtensionPage {
       ["link"],
       [{ align: [] }],
     ];
+    console.log(this.lastNewsletterdetail)
   }
 
   oncreate(vnode: Mithril.VnodeDOM<ExtensionPageAttrs, this>) {
     super.oncreate(vnode);
+
 
     this.quill = new Quill("#editor-container", {
       theme: "snow",
@@ -43,12 +47,24 @@ export default class SendEmailPage extends ExtensionPage {
       <div className="container">
         <div className='newsletter-stats-container'>
           <div className='newsletter-stats-card'>
-            <h3>Total Subscribers</h3>
-            <small>count of total subscriber users</small>
+            <h3>{app.translator.trans('justoverclock-newsletter.admin.totalSubscribers')}</h3>
+            <small>{app.translator.trans('justoverclock-newsletter.admin.totalSubscribersCount')}</small>
             <h2 className='stats-number'>{this.totalSubscribers}</h2>
             <p>
               {app.translator.trans('justoverclock-newsletter.admin.newsletterCountText')}
             </p>
+          </div>
+          <div className='newsletter-stats-card'>
+            <h3>{app.translator.trans('justoverclock-newsletter.admin.lastNewsletterSent')}</h3>
+            <small>{app.translator.trans('justoverclock-newsletter.admin.lastNewsletterSentDescription')}</small>
+            <h2 className='stats-number'>
+              {this.lastNewsletterdetail
+                ? this.lastNewsletterdetail.attributes.title
+                : app.translator.trans('justoverclock-newsletter.admin.noNewsletterSent')}
+            </h2>
+            {this.lastNewsletterdetail
+              ? `${app.translator.trans('justoverclock-newsletter.admin.lastNewsletterSentText')} ${new Date(this.lastNewsletterdetail.attributes.createdAt).toISOString().slice(0,16)}`
+              : app.translator.trans('justoverclock-newsletter.admin.noNewsletterSent')}
           </div>
         </div>
         <div className="Form-group">
@@ -56,7 +72,7 @@ export default class SendEmailPage extends ExtensionPage {
           <input
             className="FormControl"
             type="text"
-            placeholder="Email title"
+            placeholder="newsletter title"
             oninput={(e: { target: { value: any; }; }) => (this.subject = e.target.value)}
           />
         </div>
@@ -85,10 +101,20 @@ export default class SendEmailPage extends ExtensionPage {
     })
   }
 
+  getLastNewsletterDetails() {
+    app.request({
+      method: 'GET',
+      url: app.forum.attribute('apiUrl') + '/last-newsletter/get',
+    }).then(data => {
+      this.lastNewsletterdetail = data.data.length > 0 ? data.data[0] : null;
+      console.log(data.data)
+      m.redraw()
+    })
+  }
+
   sendEmail() {
     this.loading = true
     this.body = this.quill.getSemanticHTML();
-    console.log(this.body)
     app.request({
       method: 'POST',
       url: app.forum.attribute('apiUrl') + '/newsletter/sendall',

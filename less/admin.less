@@ -992,8 +992,8 @@
 
 .newsletter-stats-card {
   display: flex;
+  justify-content: space-between;
   width: 100%;
-  max-width: 250px;
   padding: 1rem;
   border-radius: 8px;
   border: 1px solid #262626;
@@ -1011,4 +1011,9 @@
 
 .stats-number {
   font-size: 25px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
